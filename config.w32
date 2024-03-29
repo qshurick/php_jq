@@ -1,0 +1,10 @@
+ARG_WITH('php_jq', 'adds jq support', 'no');
+
+if (PHP_PHP_JQ != 'no') {
+    if (CHECK_LIB("libjq.lib", "jq", PHP_JQ) &&
+        CHECK_HEADER_ADD_INCLUDE("jq.h", "CFLAGS_LIBJQ", PHP_JQ + "\\include")) {
+        AC_DEFINE('HAVE_PHP_JQ', 1, 'php_jq support enabled');
+        EXTENSION('php_jq', 'php_jq.c', null, '/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1');
+    }
+
+}
